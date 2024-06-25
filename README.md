@@ -1,6 +1,11 @@
 # Simple Heatmap Webpage
 
-This project is a simple webpage that allows users to interact with a heatmap in the following ways:
+
+![screenshot](https://github.com/joshua-sajeev/heatmap_webpage/assets/99077093/a9db6a95-17de-46e2-8d7b-ba50d3c51cf4)
+
+
+This project![Uploading screenshot.png…]()
+ is a simple webpage that allows users to interact with a heatmap in the following ways:
 
 - **Scrolling**: Users can scroll up and down to increment or decrement values within the heatmap.
 - **Setting Random Values**: Users can set random values to populate the heatmap.
