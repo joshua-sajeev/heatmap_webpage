@@ -1,0 +1,122 @@
+/* General body styles */
+body {
+  background-image: url('image.jpg'); /* Replace 'image.jpg' with your actual image path */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  font-family: Arial, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+}
+
+/* Container styles with glassy effect and uplifted shadow */
+.container {
+  text-align: center;
+  background-color: transparent; /* Transparent background */
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(0, 0, 0, 0.1); /* Uplifted shadow */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  max-width: 80%;
+  backdrop-filter: blur(10px); /* Glassy effect with backdrop filter */
+}
+/* Heatmap styles */
+.heatmap {
+  margin-top: 20px;
+}
+
+/* Matrix table styles */
+.matrix-table {
+  width: 300px;
+  height: 300px;
+  border: 2px solid #ccc;
+  border-collapse: collapse;
+  margin: 0 auto; /* Centering the table horizontally */
+}
+
+.matrix-table td {
+  width: 100px;
+  height: 100px;
+  border: 1px solid #ddd;
+  text-align: center;
+  font-size: 24px;
+  color: #333;
+  background-color: #f7f7f7;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  user-select: none; /* Disable text selection */
+  -webkit-user-select: none; /* Disable text selection for WebKit browsers */
+  -moz-user-select: none; /* Disable text selection for Firefox */
+  -ms-user-select: none; /* Disable text selection for IE/Edge */}
+}
+.matrix-table td:hover {
+  background-color: #f0f0f0;
+}
+
+/* Shared button styles */
+#reset-btn, #random-btn, #save-btn {
+  background-color: #4CAF50;
+  color: white;
+  padding: 10px 20px;
+  font-size: 18px;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  margin-top: 20px;
+  transition: background-color 0.3s ease;
+}
+
+#reset-btn:hover, #random-btn:hover, #save-btn:hover {
+  background-color: #45a040;
+}
+
+/* Specific styles for random button */
+#random-btn {
+  background-color: #007bff; /* Blue background */
+}
+
+#random-btn:hover {
+  background-color: #0056b3; /* Darker blue on hover */
+}
+
+
+/* Media queries for responsive design */
+@media (max-width: 768px) {
+  .container {
+    max-width: 90%;
+  }
+
+  .matrix-table {
+    width: 250px;
+    height: 250px;
+  }
+
+  .matrix-table td {
+    width: 80px;
+    height: 80px;
+    font-size: 18px;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: 10px;
+  }
+
+  .matrix-table {
+    width: 200px;
+    height: 200px;
+  }
+
+  .matrix-table td {
+    width: 60px;
+    height: 60px;
+    font-size: 16px;
+  }
+}

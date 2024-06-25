@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Heatmap Matrix</title>
+  <link rel="stylesheet" href="styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js" integrity="sha512-BNaRQnYJYiPSqHHDb58B0yaPfCu+Wgds8Gp/gU33kqBtgNS4tSPHuGibyoeqMV/TJlSKda6FXzoEyYGjTe+vXA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</head>
+<body>
+      <div class="container">
+    <h1>Heatmap Matrix</h1>
+    <p>Click or scroll to adjust values. Reset button sets values to 0.</p>
+    <div class="heatmap">
+      <table class="matrix-table">
+        <tr>
+          <td class="cell" id="cell-1">0</td>
+          <td class="cell" id="cell-2">0</td>
+          <td class="cell" id="cell-3">0</td>
+        </tr>
+        <tr>
+          <td class="cell" id="cell-4">0</td>
+          <td class="cell" id="cell-5">0</td>
+          <td class="cell" id="cell-6">0</td>
+        </tr>
+        <tr>
+          <td class="cell" id="cell-7">0</td>
+          <td class="cell" id="cell-8">0</td>
+          <td class="cell" id="cell-9">0</td>
+        </tr>
+      </table>
+    </div>
+    <div class="buttons">
+      <button id="reset-btn">Reset</button>
+      <button id="random-btn">Randomize</button>
+      <button id="save-btn">Save as Image</button>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
