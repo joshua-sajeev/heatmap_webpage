@@ -1,5 +1,24 @@
+.toggle-btn {
+  color: black;
+  border: none;
+  outline: none;
+  padding: 10px 20px;
+  font-size: 18px;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  margin-top: 20px;
+  transition: background-color 0.3s ease;
+}
+.toggle-btn.false {
+  background-color: #237EDC;
+  color: white; /* Increase text contrast for readability */
+}
+.toggle-btn.true {
+  background-color: #DC8123;
+}
 [v-cloak]{
-    display: none;
+  display: none;
 }
 /* General body styles */
 body {
@@ -18,6 +37,7 @@ body {
 /* Container styles with glassy effect and uplifted shadow */
 .container {
   text-align: center;
+  width: 650px;
   background-color: transparent; /* Transparent background */
   padding: 20px;
   border-radius: 8px;
@@ -78,10 +98,11 @@ button{
   transition: background-color 0.3s ease;
 }
 
-#reset-btn:hover, #random-btn:hover, #save-btn:hover {
+#reset-btn:hover, #save-btn:hover {
   background-color: #45a040;
 }
 
+/* Specific styles for random button */
 /* Specific styles for random button */
 #random-btn {
   background-color: #007bff; /* Blue background */
@@ -90,4 +111,123 @@ button{
 #random-btn:hover {
   background-color: #0056b3; /* Darker blue on hover */
 }
+/* Info button styles */
+.info-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 50%;
+    font-size: 18px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
 
+.info-btn:hover {
+    background-color: #0056b3;
+}
+/* Settings Modal styles */
+.settings-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.settings-modal {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    max-width: 400px;
+    width: 100%;
+    text-align: center;
+}
+
+.settings-modal h2 {
+    margin-top: 0;
+}
+
+.settings-modal button {
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.settings-modal button:hover {
+    background-color: #0056b3;
+}
+/* Modal styles */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    max-width: 400px;
+    width: 100%;
+    text-align: center;
+}
+
+.modal h2 {
+    margin-top: 0;
+}
+
+.modal button {
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.modal button:hover {
+    background-color: #0056b3;
+}
+/* Settings button styles */
+.settings-btn {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 4%;
+    font-size: 13px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.settings-btn:hover {
+    background-color: #0056b3;
+}

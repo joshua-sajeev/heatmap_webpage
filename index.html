@@ -1,62 +1,103 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <title>Heatmap Matrix</title>
-    <link rel="stylesheet" href="styles.css">
-</head>
-<body>
-    <div v-cloak id="app" class="container">
-        <h1>Heatmap Matrix</h1>
-        <p>Click or scroll to adjust values. Reset button sets values to 0.</p>
-        <p>Left-click to increment and right-click to decrement</p>
-        <div class="heatmap">
-            <table class="matrix-table">
-                <tr>
-                    <td class="cell"
-                        v-for="(cell, index) in cells.slice(0, 3)"
-                        :key="index"
-                        @click="incrementCell(index)"
-                        @contextmenu.prevent="decrementCell(index)"
-                        @wheel="incrementCell(index, $event)"
-                        :style="getCellStyles(cell)">
-                        {{ cell }}
-                    </td>
-                </tr>
-                <tr>
-                    <td class="cell"
-                        v-for="(cell, index) in cells.slice(3, 6)"
-                        :key="index + 3"
-                        @click="incrementCell(index + 3)"
-                        @contextmenu.prevent="decrementCell(index + 3)"
-                        @wheel="incrementCell(index + 3, $event)"
-                        :style="getCellStyles(cell)">
-                        {{ cell }}
-                    </td>
-                </tr>
-                <tr>
-                    <td class="cell"
-                        v-for="(cell, index) in cells.slice(6, 9)"
-                        :key="index + 6"
-                        @click="incrementCell(index + 6)"
-                        @contextmenu.prevent="decrementCell(index + 6)"
-                        @wheel="incrementCell(index + 6, $event)"
-                        :style="getCellStyles(cell)">
-                        {{ cell }}
-                    </td>
-                </tr>
-            </table>
+    <head>
+        <title>Heatmap Matrix</title>
+        <link rel="stylesheet" href="styles.css">
+    </head>
+    <body>
+        <div v-cloak id="app" class="container">
+            <button @click="showInfo" class="info-btn">?</button>
+            <button @click="showSettings" class="settings-btn">Custom</button>
+            <h1>Heatmap Matrix</h1>
+            <p>Click or scroll to adjust values. Reset button sets values to 0.</p>
+            <p>Left-click to increment and right-click to decrement</p>
+            <div class="heatmap">
+                <table class="matrix-table">
+
+                    <!-- First row of cells -->
+                    <tr>
+                        <td class="cell"
+                            v-for="(cell, index) in cells.slice(0, 3)"
+                            :key="index"
+                            @click="incrementCell(index)"
+                            @contextmenu.prevent="decrementCell(index)"
+                            @wheel="incrementCell(index, $event)"
+                            :style="getCellStyles(cell)">
+                            <span v-if="!editing">{{ cell }}</span>
+                            <input v-else type="number" v-model="cells[index]" @input="validateCell(index)">
+                        </td>
+                    </tr>
+
+                    <!-- Second row of cells -->
+                    <tr>
+                        <td class="cell"
+                            v-for="(cell, index) in cells.slice(3, 6)"
+                            :key="index + 3"
+                            @click="incrementCell(index + 3)"
+                            @contextmenu.prevent="decrementCell(index + 3)"
+                            @wheel="incrementCell(index + 3, $event)"
+                            :style="getCellStyles(cell)">
+                            <span v-if="!editing">{{ cell }}</span>
+                            <input v-else type="number" v-model="cells[index + 3]" @input="validateCell(index + 3)">
+                        </td>
+                    </tr>
+
+                    <!-- Third row of cells -->
+                    <tr>
+                        <td class="cell"
+                            v-for="(cell, index) in cells.slice(6, 9)"
+                            :key="index + 6"
+                            @click="incrementCell(index + 6)"
+                            @contextmenu.prevent="decrementCell(index + 6)"
+                            @wheel="incrementCell(index + 6, $event)"
+                            :style="getCellStyles(cell)">
+                            <span v-if="!editing">{{ cell }}</span>
+                            <input v-else type="number" v-model="cells[index + 6]" @input="validateCell(index + 6)">
+                        </td>
+                    </tr>
+
+                </table>
+            </div>
+
+            <div class="buttons">
+                <button @click="resetCells" id="reset-btn">Reset</button>
+                <button @click="randomizeCells" id="random-btn">Randomize</button>
+                <button @click="saveAsImage" id="save-btn">Save as Image</button>
+                <button class="toggle-btn" :class="{ 'true': editing, 'false': !editing }" @click="toggleEditing" id="edit-btn">
+                    {{ editing ? 'Editing' : 'Not Editing' }}
+                </button>
+            </div>
+
+            <!-- Modal for guidelines -->
+            <div v-if="showModal" class="modal-overlay" @click.self="showModal = false">
+                <div class="modal" @click.stop>
+                    <h2>How to Use</h2>
+                    <p>Click on a cell to increment its value.</p>
+                    <p>Right-click on a cell to decrement its value.</p>
+                    <p>Scroll over a cell to increment or decrement its value.</p>
+                    <p>Use the Reset button to set all cell values to 0.</p>
+                    <p>Use the Randomize button to assign random values to all cells.</p>
+                    <p>Use the Edit button to manually set values for the cells.</p>
+                    <button @click="showModal = false">Close</button>
+                </div>
+            </div>
+
+            <!-- Modal for Settings -->
+            <div v-if="showSettingsModal" class="settings-modal-overlay" @click.self="showSettingsModal = false">
+                <div class="settings-modal" @click.stop>
+                    <h2>Custom Settings</h2>
+                    <p>Enter your maximum cell value</p> <input v-model.number="customMaxCellVal" type="number" placeholder="maxCellVal" />
+                    <div class="modal-buttons">
+                        <button @click="applySettings">Apply</button>
+                        <button @click="cancelSettings">Close</button>
+                    </div>
+                    <button @click="showSettingsModal = false">Close</button>
+                </div>
+            </div>
         </div>
 
-        <div class="buttons">
-            <button @click="resetCells" id="reset-btn">Reset</button>
-            <button @click="randomizeCells" id="random-btn">Randomize</button>
-            <button @click="saveAsImage" id="save-btn">Save as Image</button>
-        </div>
-    </div>
-
-    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-    <script src="app.js"></script>
-</body>
+        <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+        <script src="app.js"></script>
+    </body>
 </html>
-
