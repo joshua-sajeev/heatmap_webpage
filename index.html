@@ -11,6 +11,8 @@
             <h1>Heatmap Matrix</h1>
             <p>Click or scroll to adjust values. Reset button sets values to 0.</p>
             <p>Left-click to increment and right-click to decrement</p>
+            <h3>Max Value: {{maxCellVal}}</h3>
+            <h3>Style: {{selectedStyle}}</h3>
             <div class="heatmap">
                 <table class="matrix-table">
 
@@ -22,9 +24,9 @@
                             @click="incrementCell(index)"
                             @contextmenu.prevent="decrementCell(index)"
                             @wheel="incrementCell(index, $event)"
-                            :style="getCellStyles(cell)">
+                            :style="updateCellStyles(cell)">
                             <span v-if="!editing">{{ cell }}</span>
-                            <input v-else type="number" v-model="cells[index]" @input="validateCell(index)">
+                            <input v-else type="number" v-model="cells[index]" @input="validateCell(index)" min="0">
                         </td>
                     </tr>
 
@@ -36,9 +38,9 @@
                             @click="incrementCell(index + 3)"
                             @contextmenu.prevent="decrementCell(index + 3)"
                             @wheel="incrementCell(index + 3, $event)"
-                            :style="getCellStyles(cell)">
+                            :style="updateCellStyles(cell)">
                             <span v-if="!editing">{{ cell }}</span>
-                            <input v-else type="number" v-model="cells[index + 3]" @input="validateCell(index + 3)">
+                            <input v-else type="number" v-model="cells[index + 3]" @input="validateCell(index + 3)" min="0">
                         </td>
                     </tr>
 
@@ -50,9 +52,9 @@
                             @click="incrementCell(index + 6)"
                             @contextmenu.prevent="decrementCell(index + 6)"
                             @wheel="incrementCell(index + 6, $event)"
-                            :style="getCellStyles(cell)">
+                            :style="updateCellStyles(cell)">
                             <span v-if="!editing">{{ cell }}</span>
-                            <input v-else type="number" v-model="cells[index + 6]" @input="validateCell(index + 6)">
+                            <input v-else type="number" v-model="cells[index + 6]" @input="validateCell(index + 6)" min="0">
                         </td>
                     </tr>
 
@@ -64,7 +66,7 @@
                 <button @click="randomizeCells" id="random-btn">Randomize</button>
                 <button @click="saveAsImage" id="save-btn">Save as Image</button>
                 <button class="toggle-btn" :class="{ 'true': editing, 'false': !editing }" @click="toggleEditing" id="edit-btn">
-                    {{ editing ? 'Editing' : 'Not Editing' }}
+                    {{ editing ? 'Editing' : 'Edit' }}
                 </button>
             </div>
 
@@ -78,22 +80,34 @@
                     <p>Use the Reset button to set all cell values to 0.</p>
                     <p>Use the Randomize button to assign random values to all cells.</p>
                     <p>Use the Edit button to manually set values for the cells.</p>
+                    <p>Use the Custom button to set the maximum cell value.</p>
                     <button @click="showModal = false">Close</button>
                 </div>
             </div>
 
-            <!-- Modal for Settings -->
-            <div v-if="showSettingsModal" class="settings-modal-overlay" @click.self="showSettingsModal = false">
-                <div class="settings-modal" @click.stop>
-                    <h2>Custom Settings</h2>
-                    <p>Enter your maximum cell value</p> <input v-model.number="customMaxCellVal" type="number" placeholder="maxCellVal" />
-                    <div class="modal-buttons">
-                        <button @click="applySettings">Apply</button>
-                        <button @click="cancelSettings">Close</button>
-                    </div>
-                    <button @click="showSettingsModal = false">Close</button>
-                </div>
+<!-- Modal for Settings -->
+<div v-if="showSettingsModal" class="settings-modal-overlay" @click.self="showSettingsModal = false">
+    <div class="settings-modal" @click.stop>
+        <h2>Custom Settings</h2>
+        <p>Enter your maximum cell value</p>
+        <input v-model.number="customMaxCellVal" type="number" placeholder="maxCellVal" min="0" max="30" />
+        <p>Select Style</p>
+        <select v-model="selectedStyle">
+            <option value="default">Default</option>
+            <option value="custom">Custom</option>
+        </select>
+        <div v-if="selectedStyle === 'custom'" class="color-settings">
+            <div v-for="i in customMaxCellVal + 1" :key="i">
+                <label>Value {{ i - 1 }}: </label>
+                <input type="color" v-model="customColors[i - 1]" />
             </div>
+        </div>
+        <div class="modal-buttons">
+            <button @click="applySettings">Apply</button>
+            <button @click="showSettingsModal = false">Close</button>
+        </div>
+    </div>
+</div>
         </div>
 
         <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
