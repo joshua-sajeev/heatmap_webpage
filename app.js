@@ -8,7 +8,8 @@ return {
             showSettingsModal: false,
             selectedStyle: 'default', // Default style
             customColors: Array(31).fill('#ff0000'), // Default colors for custom values (0-30)
-            customMaxCellVal: 15 // Initial value, synced with maxCellVal
+            customMaxCellVal: 15, // Initial value, synced with maxCellVal
+            default: true,
         };
     },
     methods: {
@@ -45,7 +46,7 @@ return {
         },
         getCellStyles(cellValue) {
             let hue = (cellValue / this.maxCellVal) * 120; // Adjusted maximum value
-            let backgroundColor = `hsl(${hue}, 100%, 50%)`;
+            let backgroundColor = `hsl(${hue}, 100%, 60%)`;
             let textColor = this.getContrastColor(backgroundColor);
             return {
                 backgroundColor: backgroundColor,
