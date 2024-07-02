@@ -16,7 +16,6 @@
             <div class="heatmap">
                 <table class="matrix-table">
 
-                    <!-- First row of cells -->
                     <tr>
                         <td class="cell"
                             v-for="(cell, index) in cells.slice(0, 3)"
@@ -30,7 +29,6 @@
                         </td>
                     </tr>
 
-                    <!-- Second row of cells -->
                     <tr>
                         <td class="cell"
                             v-for="(cell, index) in cells.slice(3, 6)"
@@ -44,7 +42,6 @@
                         </td>
                     </tr>
 
-                    <!-- Third row of cells -->
                     <tr>
                         <td class="cell"
                             v-for="(cell, index) in cells.slice(6, 9)"
@@ -85,29 +82,29 @@
                 </div>
             </div>
 
-<!-- Modal for Settings -->
-<div v-if="showSettingsModal" class="settings-modal-overlay" @click.self="showSettingsModal = false">
-    <div class="settings-modal" @click.stop>
-        <h2>Custom Settings</h2>
-        <p>Enter your maximum cell value</p>
-        <input v-model.number="customMaxCellVal" type="number" placeholder="maxCellVal" min="0" max="30" />
-        <p>Select Style</p>
-        <select v-model="selectedStyle">
-            <option value="default">Default</option>
-            <option value="custom">Custom</option>
-        </select>
-        <div v-if="selectedStyle === 'custom'" class="color-settings">
-            <div v-for="i in customMaxCellVal + 1" :key="i">
-                <label>Value {{ i - 1 }}: </label>
-                <input type="color" v-model="customColors[i - 1]" />
+            <!-- Modal for Settings -->
+            <div v-if="showSettingsModal" class="settings-modal-overlay" @click.self="showSettingsModal = false">
+                <div class="settings-modal" @click.stop>
+                    <h2>Custom Settings</h2>
+                    <p>Enter your maximum cell value</p>
+                    <input v-model.number="customMaxCellVal" type="number" placeholder="maxCellVal" min="0" max="30" />
+                    <p>Select Style</p>
+                    <select v-model="selectedStyle">
+                        <option value="default">Default</option>
+                        <option value="custom">Custom</option>
+                    </select>
+                    <div v-if="selectedStyle === 'custom'" class="color-settings">
+                        <div v-for="i in customMaxCellVal + 1" :key="i">
+                            <label>Value {{ i - 1 }}: </label>
+                            <input type="color" v-model="customColors[i - 1]" />
+                        </div>
+                    </div>
+                    <div class="modal-buttons">
+                        <button @click="applySettings">Apply</button>
+                        <button @click="showSettingsModal = false">Close</button>
+                    </div>
+                </div>
             </div>
-        </div>
-        <div class="modal-buttons">
-            <button @click="applySettings">Apply</button>
-            <button @click="showSettingsModal = false">Close</button>
-        </div>
-    </div>
-</div>
         </div>
 
         <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>

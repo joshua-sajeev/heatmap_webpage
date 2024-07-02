@@ -1,14 +1,14 @@
 const app = Vue.createApp({
     data() {
-return {
+        return {
             cells: Array(9).fill(0),
             maxCellVal: 15,
             editing: false,
             showModal: false,
             showSettingsModal: false,
-            selectedStyle: 'default', // Default style
-            customColors: Array(31).fill('#ff0000'), // Default colors for custom values (0-30)
-            customMaxCellVal: 15, // Initial value, synced with maxCellVal
+            selectedStyle: 'default',
+            customColors: Array(31).fill('#ff0000'),
+            customMaxCellVal: 15,
             default: true,
         };
     },
@@ -45,7 +45,7 @@ return {
             this.editing = !this.editing;
         },
         getCellStyles(cellValue) {
-            let hue = (cellValue / this.maxCellVal) * 120; // Adjusted maximum value
+            let hue = (cellValue / this.maxCellVal) * 120; 
             let backgroundColor = `hsl(${hue}, 100%, 60%)`;
             let textColor = this.getContrastColor(backgroundColor);
             return {
@@ -54,7 +54,7 @@ return {
             };
         },
         customCellStyles(cellValue) {
-            let hue = (cellValue / this.maxCellVal) * 240; // Example custom hue adjustment
+            let hue = (cellValue / this.maxCellVal) * 240; 
             let backgroundColor = this.hexToHsl(this.customColors[cellValue]);
             let textColor = this.getContrastColor(backgroundColor);
             return {
@@ -63,23 +63,19 @@ return {
             };
         },
         hexToHsl(hex) {
-            // Remove '#' if present
             hex = hex.replace('#', '');
 
-            // Parse the hex values
             let r = parseInt(hex.substring(0, 2), 16) / 255;
             let g = parseInt(hex.substring(2, 4), 16) / 255;
             let b = parseInt(hex.substring(4, 6), 16) / 255;
 
-            // Find greatest and smallest channel values
             let cmin = Math.min(r, g, b),
-                cmax = Math.max(r, g, b),
-                delta = cmax - cmin,
-                h = 0,
-                s = 0,
-                l = 0;
+            cmax = Math.max(r, g, b),
+            delta = cmax - cmin,
+            h = 0,
+            s = 0,
+            l = 0;
 
-            // Calculate hue
             if (delta == 0) h = 0;
             else if (cmax == r) h = ((g - b) / delta) % 6;
             else if (cmax == g) h = (b - r) / delta + 2;
@@ -87,16 +83,12 @@ return {
 
             h = Math.round(h * 60);
 
-            // Make negative hues positive behind 360°
             if (h < 0) h += 360;
 
-            // Calculate lightness
             l = (cmax + cmin) / 2;
 
-            // Calculate saturation
             s = delta == 0 ? 0 : delta / (1 - Math.abs(2 * l - 1));
 
-            // Multiply l and s by 100
             s = +(s * 100).toFixed(1);
             l = +(l * 100).toFixed(1);
 
@@ -128,12 +120,10 @@ return {
         },
         showSettings() {
             this.showSettingsModal = true;
-            this.customMaxCellVal = this.maxCellVal; // Sync customMaxCellVal with maxCellVal
+            this.customMaxCellVal = this.maxCellVal;
         },
         applySettings() {
-            // Update maxCellVal with customMaxCellVal
             this.maxCellVal = this.customMaxCellVal;
-            // Adjust customColors array length to match new maxCellVal
             this.customColors.length = this.maxCellVal + 1;
             this.default = this.selectedStyle === 'default';
             this.showSettingsModal = false;

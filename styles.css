@@ -12,7 +12,7 @@
 }
 .toggle-btn.false {
   background-color: #237EDC;
-  color: white; /* Increase text contrast for readability */
+  color: white;
 }
 .toggle-btn.true {
   background-color: #DC8123;
@@ -20,9 +20,8 @@
 [v-cloak]{
   display: none;
 }
-/* General body styles */
 body {
-  background-image: url('image.jpg'); /* Replace 'image.jpg' with your actual image path */
+  background-image: url('image.jpg'); 
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -34,11 +33,10 @@ body {
   margin: 0;
 }
 
-/* Container styles with glassy effect and uplifted shadow */
 .container {
   text-align: center;
   width: 650px;
-  background-color: transparent; /* Transparent background */
+  background-color: transparent; 
   padding: 20px;
   border-radius: 8px;
   box-shadow: 0 12px 24px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(0, 0, 0, 0.1); /* Uplifted shadow */
@@ -46,24 +44,22 @@ body {
   align-items: center;
   justify-content: center;
   max-width: 70%;
-  backdrop-filter: blur(10px); /* Glassy effect with backdrop filter */
+  backdrop-filter: blur(10px); 
 }
 
 button{
     margin: 10px;
 }
 
-/* Heatmap styles */
 .heatmap {
   margin-top: 20px;
 }
-/* Matrix table styles */
 .matrix-table {
   width: 300px;
   height: 300px;
   border: 2px solid #ccc;
   border-collapse: collapse;
-  margin: 0 auto; /* Centering the table horizontally */
+  margin: 0 auto; 
 }
 
 .matrix-table td {
@@ -76,16 +72,15 @@ button{
   background-color: #f7f7f7;
   cursor: pointer;
   transition: background-color 0.3s ease;
-  user-select: none; /* Disable text selection */
-  -webkit-user-select: none; /* Disable text selection for WebKit browsers */
-  -moz-user-select: none; /* Disable text selection for Firefox */
-  -ms-user-select: none; /* Disable text selection for IE/Edge */}
+  user-select: none;
+  -webkit-user-select: none; 
+  -moz-user-select: none; 
+  -ms-user-select: none;
 }
 .matrix-table td:hover {
   background-color: #f0f0f0;
 }
 
-/* Shared button styles */
 #reset-btn, #random-btn, #save-btn {
   background-color: #4CAF50;
   color: white;
@@ -102,16 +97,13 @@ button{
   background-color: #45a040;
 }
 
-/* Specific styles for random button */
-/* Specific styles for random button */
 #random-btn {
-  background-color: #007bff; /* Blue background */
+  background-color: #007bff; 
 }
 
 #random-btn:hover {
-  background-color: #0056b3; /* Darker blue on hover */
+  background-color: #0056b3;
 }
-/* Info button styles */
 .info-btn {
     position: absolute;
     top: 10px;
@@ -129,7 +121,6 @@ button{
 .info-btn:hover {
     background-color: #0056b3;
 }
-/* Settings Modal styles */
 .settings-modal-overlay {
     position: fixed;
     top: 0;
@@ -171,7 +162,6 @@ button{
 .settings-modal button:hover {
     background-color: #0056b3;
 }
-/* Modal styles */
 .modal-overlay {
     position: fixed;
     top: 0;
@@ -213,7 +203,6 @@ button{
 .modal button:hover {
     background-color: #0056b3;
 }
-/* Settings button styles */
 .settings-btn {
     position: absolute;
     top: 10px;
